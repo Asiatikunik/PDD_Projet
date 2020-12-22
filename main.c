@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define TAILLE_TAB 10000
+#define TAILLE_TAB 1000000
 #define MIN_ALEA 1
 #define MAX_ALEA 10000
 
@@ -97,10 +97,10 @@ int main(void) {
 	srand((unsigned)time(NULL)); // A faire 1 fois, pour les fonctions aléatoire
 
 	init_tab_alea(p_tab);
-	afficher_tab(p_tab);
+//	afficher_tab(p_tab);
 
 	triFusion(p_tab, 0, TAILLE_TAB);
-	afficher_tab(p_tab);
+//	afficher_tab(p_tab);
 
 	free(p_tab);
 
