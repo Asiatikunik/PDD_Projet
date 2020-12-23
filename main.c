@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-
+#include <omp.h>
 #define TAILLE_TAB 1000000
 #define MIN_ALEA 1
 #define MAX_ALEA 10000
@@ -91,7 +91,7 @@ void triFusion(int* tab, int debut, int fin) {
 }
 
 int main(void) {
-
+	double start = omp_get_wtime();
 	int* p_tab = NULL;
 	p_tab = malloc(TAILLE_TAB * sizeof(int));
 	srand((unsigned)time(NULL)); // A faire 1 fois, pour les fonctions aléatoire
@@ -103,7 +103,9 @@ int main(void) {
 //	afficher_tab(p_tab);
 
 	free(p_tab);
-
+	double stop = omp_get_wtime();
+	double time = stop - start;
+	printf("temps exec = %f\n",time);
 
 	return EXIT_SUCCESS;
 }
