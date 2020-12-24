@@ -44,7 +44,7 @@ void fusion(int* tab, int debut, int milieu, int fin){
 
 	G = malloc(n1*sizeof(int));
 	D = malloc(n2*sizeof(int));
-	#pragma omp parallel for schedule(dynamic,4)
+//	#pragma omp parallel for schedule(dynamic,4)
 	
 	for (int i = 0; i < n1; i++)
 		G[i] = tab[debut + i];
