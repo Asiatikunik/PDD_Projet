@@ -45,11 +45,9 @@ void fusion(int* tab, int debut, int milieu, int fin){
 	G = malloc(n1*sizeof(int));
 	D = malloc(n2*sizeof(int));
 //	#pragma omp parallel for schedule(dynamic,4)
-	
 	for (int i = 0; i < n1; i++)
 		G[i] = tab[debut + i];
 	
-
 	for (int j = 0; j < n2; j++)
 		D[j] = tab[milieu + 1 + j];
 	// maintient trois pointeurs, un pour chacun des deux tableaux et un pour
@@ -106,6 +104,7 @@ void triFusion(int* tab, int debut, int fin) {
 }
 
 int main(void) {
+	//On prend le tmps début du prog
 	double start = omp_get_wtime();
 	int* p_tab = NULL;
 	p_tab = malloc(TAILLE_TAB * sizeof(int));
@@ -118,9 +117,9 @@ int main(void) {
 	//	afficher_tab(p_tab);
 
 	free(p_tab);
+	//On affiche le temps de fin du prog
 	double stop = omp_get_wtime();
 	double time = stop - start;
 	printf("temps exec = %f\n",time);
-
 	return EXIT_SUCCESS;
 }
