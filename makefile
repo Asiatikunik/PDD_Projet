@@ -1,10 +1,11 @@
 
 
 All:
-	gcc  -Wall -fopenmp -O2 main.c -o nonPara
-	gcc  -Wall -fopenmp -O2 mainPara.c -o paral
+	gcc  -Wall -fopenmp -O2 static.c -o static
+	./static
+# 	gcc  -Wall -fopenmp -O2 parallele.c -o parallele
 
 clean: 
 	rm -rf *.o
-	rm -rf nonPara
-	rm -rf paral
+	rm -rf static
+	rm -rf parallele

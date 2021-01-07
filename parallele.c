@@ -33,55 +33,33 @@ void afficher_tab(int* tab){
 	printf("\n");
 }
 
-void fusion(int* tab, int debut, int milieu, int fin){
-	int n1 = milieu - debut + 1;
-	int n2 = fin - milieu;
+void fusion(int* tab, int debut, int milieu, int fin) {
+	int *tmp;
+	int count1 = debut;
+	int count2 = milieu+1;
+	int i;
 
-	//int G[n1], D[n2];
+	tmp = malloc( (milieu - debut + 1) * sizeof(int));
 
-	int* G = NULL;
-	int* D = NULL;
-
-	G = malloc(n1*sizeof(int));
-	D = malloc(n2*sizeof(int));
-//	#pragma omp parallel for schedule(dynamic,4)
-	for (int i = 0; i < n1; i++)
-		G[i] = tab[debut + i];
+	for(i=debut; i<=milieu; i++) 
+		tmp[i-debut] = tab[i];
 	
-	for (int j = 0; j < n2; j++)
-		D[j] = tab[milieu + 1 + j];
-	// maintient trois pointeurs, un pour chacun des deux tableaux et un pour
-	// maintenir l'index actuel du tableau trié final
-	int i, j, k;
-	i = 0;
-	j = 0;
-	k = debut;
-	//remplacer par une boucle for 
-	while (i < n1 && j < n2){
-		if (G[i] <= D[j]){
-			tab[k] = G[i];
-			i++;
-		}else{
-			tab[k] = D[j];
-			j++;
+
+	for(i=debut; i<=fin; i++) {        
+		if (count1 == milieu+1) 
+			break; 
+		else if (count2 == (fin+1)){ 
+			tab[i] = tmp[count1-debut];
+			count1++;
+		} else if ( tmp[count1-debut] < tab[count2]){
+			tab[i] = tmp[count1-debut];
+			count1++;
+		} else {
+			tab[i] = tab[count2];
+			count2++;
 		}
-		k++;
 	}
-
-	// Copiez tous les éléments restants du tableau non vide
-	while (i < n1) {
-		tab[k] = G[i];
-		i++;
-		k++;
-	}
-
-	while (j < n2) {
-		tab[k] = D[j];
-		j++;
-		k++;
-	}
-	free(G);
-	free(D);
+	free(tmp);
 }
 
 // Tri par fusion
