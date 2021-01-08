@@ -1,0 +1,180 @@
+-----Debut mesure-----
+----Pour 2 threads----
+sans opti
+temps exec = 6.209227
+O2
+temps exec = 3.507975
+O3
+temps exec = 3.484894
+Ofast
+temps exec = 3.470005
+----Pour 3 threads----
+sans opti
+temps exec = 6.190777
+O2
+temps exec = 3.474537
+O3
+temps exec = 3.504117
+Ofast
+temps exec = 3.492168
+----Pour 4 threads----
+sans opti
+temps exec = 6.224569
+O2
+temps exec = 3.483279
+O3
+temps exec = 4.148467
+Ofast
+temps exec = 4.005539
+----Pour 5 threads----
+sans opti
+temps exec = 6.399202
+O2
+temps exec = 3.556935
+O3
+temps exec = 3.511199
+Ofast
+temps exec = 3.493986
+----Pour 6 threads----
+sans opti
+temps exec = 6.269204
+O2
+temps exec = 3.520611
+O3
+temps exec = 3.514992
+Ofast
+temps exec = 3.490571
+----Debut static----
+Affichage du tableau: 
+ 15  35  72  40 
+ 15  54  43  60 
+ 32  21  67  90 
+
+
+Affichage du tableau: 
+ 15  35  40  54 
+ 15  21  32  43 
+ 60  67  72  90 
+
+
+temps exec = 0.000029
+Affichage du tableau: 
+ 15  35  72  40 
+ 15  54  43  60 
+ 32  21  67  90 
+
+
+Affichage du tableau: 
+ 15  35  40  54 
+ 15  21  32  43 
+ 60  67  72  90 
+
+
+temps exec = 0.000028
+Affichage du tableau: 
+ 15  35  72  40 
+ 15  54  43  60 
+ 32  21  67  90 
+
+
+Affichage du tableau: 
+ 15  35  40  54 
+ 15  21  32  43 
+ 60  67  72  90 
+
+
+temps exec = 0.000019
+Affichage du tableau: 
+ 15  35  72  40 
+ 15  54  43  60 
+ 32  21  67  90 
+
+
+Affichage du tableau: 
+ 15  35  40  54 
+ 15  21  32  43 
+ 60  67  72  90 
+
+
+temps exec = 0.000025
+-----Debut mesure-----
+----Pour 2 threads----
+sans opti
+O2
+O3
+Ofast
+----Pour 3 threads----
+sans opti
+O2
+O3
+Ofast
+----Pour 4 threads----
+sans opti
+O2
+O3
+Ofast
+----Pour 5 threads----
+sans opti
+O2
+O3
+Ofast
+----Pour 6 threads----
+sans opti
+O2
+O3
+Ofast
+----Debut static----
+-----Debut mesure-----
+----Pour 2 threads----
+sans opti
+O2
+O3
+Ofast
+----Pour 3 threads----
+sans opti
+O2
+O3
+Ofast
+----Pour 4 threads----
+sans opti
+O2
+O3
+Ofast
+----Pour 5 threads----
+sans opti
+O2
+O3
+Ofast
+----Pour 6 threads----
+sans opti
+O2
+O3
+Ofast
+----Debut static----
+-----Debut mesure-----
+----Pour 2 threads----
+sans opti
+O2
+O3
+Ofast
+----Pour 3 threads----
+sans opti
+O2
+O3
+Ofast
+----Pour 4 threads----
+sans opti
+O2
+O3
+Ofast
+----Pour 5 threads----
+sans opti
+O2
+O3
+Ofast
+----Pour 6 threads----
+sans opti
+O2
+O3
+Ofast
+----Debut static----

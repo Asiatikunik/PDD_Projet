@@ -4,12 +4,11 @@
 #include <omp.h>
 
 /*
- Nous utilisons des define sur les paramètres qui peut être changer.
- Dans le but que cela soit plus rapide pour les tests.
-*/
-// #define TAILLE_TAB 21474836
-#define TAILLE_TAB 4
-#define NB_TAB 3 // Doit être plus petit que TAILLE_TAB
+   Nous utilisons des define sur les paramètres qui peut être changer.
+   Dans le but que cela soit plus rapide pour les tests.
+ */
+#define TAILLE_TAB 20
+#define NB_TAB 100 // Doit être plus petit que TAILLE_TAB
 #define MIN_ALEA 1
 #define MAX_ALEA 100
 
@@ -30,46 +29,47 @@ void afficher_tab(int** tab){
 			printf("%3d ", tab[s][k]);
 		printf("\n");
 	}
-	
+
 	printf("\n\n");
 }
 
 /*	
- Sous fonction de initiation du tableau 
+	Sous fonction de initiation du tableau 
 	Cette fonction permet de retournée un notre aléatoire
-*/
+ */
 int nb_aleatoire(int min, int max) {
 	return rand()%(max-min+1) + min;
 }
 
 // Cette fonction permet d'initialisé le tableau avec des valeurs aléatoire
 void init_tab_alea(int** tab){
-	for(int s=0; s<NB_TAB; s++)
-		for(int k=0; k<TAILLE_TAB; k++)
+	for(int s=0; s<NB_TAB; s++){
+		for(int k=0; k<TAILLE_TAB; k++){
 			tab[s][k] = nb_aleatoire(MIN_ALEA, MAX_ALEA);
-	
+		}
+	}	
 }
 
 /*
- Cette fonction est lié au triFusion.
-	Elle prend un tableau en paramètre. Elle possède en réalité deux parties.
-	debut -> milieu
-	milieu+1 -> fin
-	Qui sont deux sous tableaux trié
-	Elle "retourne" le grand tableau trié
-*/
+   Cette fonction est lié au triFusion.
+   Elle prend un tableau en paramètre. Elle possède en réalité deux parties.
+   debut -> milieu
+   milieu+1 -> fin
+   Qui sont deux sous tableaux trié
+   Elle "retourne" le grand tableau trié
+ */
 void fusion(int* tab, int debut, int milieu, int fin) {
 	int *tmp;
 	int count1 = debut;
 	int count2 = milieu+1;
 	int i;
 
-	tmp = malloc( (milieu - debut + 1) * sizeof(int));
 
+	tmp = malloc( (milieu - debut + 1) * sizeof(int));
 	//on recopie les éléments du début du tab
 	for(i=debut; i<=milieu; i++) 
 		tmp[i-debut] = tab[i];
-	
+
 
 	for(i=debut; i<=fin; i++) {        
 		if (count1 == milieu+1) 
@@ -98,19 +98,19 @@ void triFusion(int* tab, int debut, int fin) {
 
 		triFusion(tab, debut, milieu);
 		triFusion(tab, milieu+1, fin);
-		
+
 		fusion(tab, debut, milieu, fin); // Fusionnez les deux moitiés triées
 	}
 }
 
 
 /*
- Sous fonction de tri_parallele
-	Cette fonction déplace les valeurs des tableaux,
-	En paramètre, ce sont deux tableaux trié.
-	les plus petit dans le tab1 et les plus grand dans tab2
-	en les gardants trié.
-*/
+   Sous fonction de tri_parallele
+   Cette fonction déplace les valeurs des tableaux,
+   En paramètre, ce sont deux tableaux trié.
+   les plus petit dans le tab1 et les plus grand dans tab2
+   en les gardants trié.
+ */
 void tri_merge(int* tab1, int* tab2){
 
 	int tmp[TAILLE_TAB*2];
@@ -135,7 +135,7 @@ void tri_merge(int* tab1, int* tab2){
 
 	for(int i=0; i<TAILLE_TAB; i++)
 		tab1[i] = tmp[i];
-	
+
 	for(int i=0; i<TAILLE_TAB; i++){
 		tab2[i] = tmp[count];
 		count++;
@@ -143,33 +143,32 @@ void tri_merge(int* tab1, int* tab2){
 }
 
 /*
- Cette fonction permet trié un tableau deux dimensions.
- Elle utilise le tri fusion.
- Et tri merge.
-*/
+   Cette fonction permet trié un tableau deux dimensions.
+   Elle utilise le tri fusion.
+   Et tri merge.
+ */
 void tri_parallele(int** tab){
 	int b1, b2;
 	int max, min;
 	int k;
-
 	for(int i=0; i<NB_TAB; i++)
 		triFusion(tab[i], 0, TAILLE_TAB);
 
-    for (int j = 0; j < NB_TAB; j++) {
-        k = 1+(j%2);
-        for (int i = 0; i < NB_TAB/2; i++) {
-            b1 = (k+2*i)%NB_TAB;
-            b2 = (k+2*i+1)%NB_TAB;
-            if(b1 < b2){
-                min = b1;
-                max = b2;
-            }else{
-                min = b2;
-                max = b1;
-            }
-            tri_merge(tab[min], tab[max]);
-        }
-    }
+	for (int j = 0; j < NB_TAB; j++) {
+		k = 1+(j%2);
+		for (int i = 0; i < NB_TAB/2; i++) {
+			b1 = (k+2*i)%NB_TAB;
+			b2 = (k+2*i+1)%NB_TAB;
+			if(b1 < b2){
+				min = b1;
+				max = b2;
+			}else{
+				min = b2;
+				max = b1;
+			}
+			tri_merge(tab[min], tab[max]);
+		}
+	}
 }
 
 
@@ -178,17 +177,20 @@ int main(void) {
 
 	double start = omp_get_wtime(); // Pour le tmp d'exec
 	srand((unsigned)time(NULL)); // A faire 1 fois, pour les fonctions aléatoire
-	
+
 	// Allocation mémoire pour le tableau deux dimensions
-	int** p_tab = malloc(NB_TAB * sizeof(int));
+
+	int **p_tab ;
+	p_tab = malloc(sizeof(p_tab) * NB_TAB ) ;
+
 	for(int i=0; i<NB_TAB; i++)
 		p_tab[i] = malloc(TAILLE_TAB * sizeof(int));
-
+	
 	init_tab_alea(p_tab);
-		afficher_tab(p_tab);
+//			afficher_tab(p_tab);
 
 	tri_parallele(p_tab);
-		afficher_tab(p_tab);
+//			afficher_tab(p_tab);
 
 	// Le free du tableau alloué
 	for(int i=0; i<NB_TAB; i++)

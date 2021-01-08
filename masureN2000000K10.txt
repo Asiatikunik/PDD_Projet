@@ -1,0 +1,51 @@
+-----Debut mesure-----
+----Pour 2 threads----
+sans opti
+temps exec = 0.315221
+O2
+temps exec = 0.151231
+O3
+temps exec = 0.143138
+Ofast
+temps exec = 0.143050
+----Pour 3 threads----
+sans opti
+temps exec = 0.311847
+O2
+temps exec = 0.161154
+O3
+temps exec = 0.156606
+Ofast
+temps exec = 0.152296
+----Pour 4 threads----
+sans opti
+temps exec = 0.273853
+O2
+temps exec = 0.142024
+O3
+temps exec = 0.134705
+Ofast
+temps exec = 0.134620
+----Pour 5 threads----
+sans opti
+temps exec = 0.274476
+O2
+temps exec = 0.146081
+O3
+temps exec = 0.133465
+Ofast
+temps exec = 0.140496
+----Pour 6 threads----
+sans opti
+temps exec = 0.269890
+O2
+temps exec = 0.149682
+O3
+temps exec = 0.138308
+Ofast
+temps exec = 0.134070
+----Debut static----
+temps exec = 0.516427
+temps exec = 0.240593
+temps exec = 0.226989
+temps exec = 0.229707
